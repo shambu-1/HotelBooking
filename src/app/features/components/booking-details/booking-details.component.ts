@@ -12,6 +12,9 @@ import { Room } from '../../../models/room.model';
 export class BookingDetailsComponent {
   room = input.required<Room>();
   nights = input<number>(1);
+  checkIn = input<string>('');        
+  checkOut = input<string>('');
+  hasDateError = input<boolean>(false);
 
   close = output<void>();
   confirmBooking = output<Room>();

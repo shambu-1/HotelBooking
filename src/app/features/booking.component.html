@@ -10,13 +10,36 @@
   </header>
 
   <div class="layout-stack">
-    <app-date-range-picker [errorMessage]="dateErrorMessage()" />
+    <app-date-range-picker
+      [checkInDate]="checkInDate()"
+      [checkOutDate]="checkOutDate()"
+      [errorMessage]="dateErrorMessage()"
+      (checkInChange)="onCheckInChanged($event)"
+      (checkOutChange)="onCheckOutChanged($event)"
+    />
 
-    <app-room-list [rooms]="rooms()" [selectedRoomCode]="selectedRoomCode()" (roomSelected)="onRoomSelect($event)" />
+    @if (hasValidDates()) {
+      <app-room-list
+        [rooms]="rooms()"
+        [selectedRoomCode]="selectedRoomCode()"
+        (roomSelected)="onRoomSelect($event)"
+      />
+    } @else {
+      <div class="placeholder-notice">
+        <p>Please choose a valid check-in and check-out date above to browse available rooms.</p>
+      </div>
+    }
   </div>
 
   @if (activeModalRoom(); as selected) {
-  <app-booking-details [room]="selected" (close)="closeModal()"
-    (confirmBooking)="handleBookingConfirmed($event)" />
+    <app-booking-details
+      [room]="selected"
+      [nights]="stayNights()"
+      [checkIn]="checkInDate()"
+      [checkOut]="checkOutDate()"
+      [hasDateError]="!!dateErrorMessage()"
+      (close)="closeModal()"
+      (confirmBooking)="handleBookingConfirmed($event)"
+    />
   }
 </main>

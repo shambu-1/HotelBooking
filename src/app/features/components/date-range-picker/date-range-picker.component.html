@@ -11,8 +11,9 @@
         <input 
           id="checkIn" 
           type="date" 
+          [min]="todayString"
           [value]="checkInDate()" 
-          (change)="onCheckIn($event)"
+          (input)="onCheckIn($event)"
         />
       </div>
     </div>
@@ -23,8 +24,9 @@
         <input 
           id="checkOut" 
           type="date" 
+          [min]="checkInDate() || todayString"
           [value]="checkOutDate()" 
-          (change)="onCheckOut($event)"
+          (input)="onCheckOut($event)"
         />
       </div>
     </div>

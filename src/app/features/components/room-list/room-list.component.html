@@ -1,42 +1,58 @@
-<section class="room-catalog">
-  <div class="catalog-header">
-    <div>
-      <h2 class="section-title">Available Accommodations</h2>
-      <p class="section-desc">Choose a room tailored to your travel preference</p>
+<section class="room-list-section">
+  <!-- Booking Conflict / Selection Error Banner -->
+  @if (bookingError()) {
+    <div class="error-banner" role="alert">
+      <svg class="error-icon" viewBox="0 0 20 20" fill="currentColor">
+        <path
+          fill-rule="evenodd"
+          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+          clip-rule="evenodd"
+        />
+      </svg>
+      <span>{{ bookingError() }}</span>
     </div>
-    <span class="count-badge">{{ rooms().length }} rooms listed</span>
-  </div>
+  }
 
   <div class="rooms-grid">
     @for (room of rooms(); track room.code) {
-    <div class="room-card" [class.selected]="room.code === selectedRoomCode()" (click)="onSelect(room)" tabindex="0" [class.is-disabled]="room.status === 'booked'">
-      <div class="card-header">
-        <span class="room-code">{{ room.code }}</span>
-        <span class="guest-tag">
-          <svg class="icon" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
-          </svg>
-          Up to {{ room.maxGuests }} Guests
-        </span>
-      </div>
-
-      <div class="card-body">
-        <h3 class="room-type">{{ room.type }}</h3>
-        <p class="room-features">Spacious layout with modern furnishings & ensuite bathroom.</p>
-      </div>
-
-      <div class="card-footer">
-        <div class="pricing">
-          <span class="price-value">₹{{ room.pricePerNight | number }}</span>
-          <span class="price-cycle">/ night</span>
+      <div
+        class="room-card"
+        [class.selected]="room.code === selectedRoomCode()"
+        [class.is-disabled]="room.status === 'booked'"
+        (click)="onSelect(room)"
+        tabindex="0"
+      >
+        <div class="card-header">
+          <span class="room-code">{{ room.code }}</span>
+          <span class="guest-tag">
+            <svg class="icon" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
+            </svg>
+            Up to {{ room.maxGuests }} Guests
+          </span>
         </div>
-        <button type="button" class="status-btn" [class.available]="room.status === 'available'"
-          [class.booked]="room.status === 'booked'">
-          <span class="status-indicator"></span>
-          <span>{{ room.status === 'available' ? 'Available' : 'Booked' }}</span>
-        </button>
+
+        <div class="card-body">
+          <h3 class="room-type">{{ room.type }}</h3>
+          <p class="room-features">Spacious layout with modern furnishings & ensuite bathroom.</p>
+        </div>
+
+        <div class="card-footer">
+          <div class="pricing">
+            <span class="price-value">₹{{ room.pricePerNight | number }}</span>
+            <span class="price-cycle">/ night</span>
+          </div>
+          <button
+            type="button"
+            class="status-btn"
+            [class.available]="room.status === 'available'"
+            [class.booked]="room.status === 'booked'"
+          >
+            <span class="status-indicator"></span>
+            <span>{{ room.status === 'available' ? 'Available' : 'Booked' }}</span>
+          </button>
+        </div>
       </div>
-    </div>
     }
   </div>
 </section>
