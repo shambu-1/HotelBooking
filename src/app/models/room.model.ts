@@ -3,4 +3,5 @@ export interface Room {
   type: string;
   pricePerNight: number;
   maxGuests: number;
+  status: string;
 }

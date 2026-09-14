@@ -1,14 +1,14 @@
 import { Room } from './room.model';
 
 export interface DateRange {
-  checkIn: string;   // ISO string format: 'YYYY-MM-DD'
-  checkOut: string;  // ISO string format: 'YYYY-MM-DD'
+  checkIn: Date | null;
+  checkOut: Date | null;
 }
 
 export interface BookingSummary {
   room: Room;
-  checkInDate: string;
-  checkOutDate: string;
+  checkInDate: Date;
+  checkOutDate: Date;
   nights: number;
   pricePerNight: number;
   totalPrice: number;

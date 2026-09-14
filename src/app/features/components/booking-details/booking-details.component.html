@@ -1,0 +1,40 @@
+<div class="modal-backdrop" (click)="onClose()">
+  <div class="modal-card" (click)="$event.stopPropagation()" role="dialog" aria-modal="true">
+    <header class="modal-header">
+      <div>
+        <span class="room-tag">{{ room().code }}</span>
+        <h2 class="modal-title">{{ room().type }}</h2>
+      </div>
+      <button type="button" class="close-btn" (click)="onClose()" aria-label="Close modal">&times;</button>
+    </header>
+
+    <div class="modal-body">
+      <div class="stat-row">
+        <span class="stat-label">Occupancy</span>
+        <span class="stat-val">Up to {{ room().maxGuests }} Guests</span>
+      </div>
+
+      <div class="stat-row">
+        <span class="stat-label">Duration</span>
+        <span class="stat-val">{{ nights() }} {{ nights() === 1 ? 'Night' : 'Nights' }}</span>
+      </div>
+
+      <div class="stat-row">
+        <span class="stat-label">Rate / Night</span>
+        <span class="stat-val">₹{{ room().pricePerNight | number }}</span>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="total-row">
+        <span>Total Payable</span>
+        <strong class="total-price">₹{{ (room().pricePerNight * nights()) | number }}</strong>
+      </div>
+    </div>
+
+    <footer class="modal-footer">
+      <button type="button" class="btn-cancel" (click)="onClose()">Cancel</button>
+      <button type="button" class="btn-confirm" (click)="onConfirm()">Confirm & Book</button>
+    </footer>
+  </div>
+</div>

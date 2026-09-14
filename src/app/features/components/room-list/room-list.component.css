@@ -1,0 +1,207 @@
+.room-catalog {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.catalog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.section-desc {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin: 0.25rem 0 0;
+}
+
+.count-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: #f1f5f9;
+  color: #475569;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid #e2e8f0;
+}
+
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.room-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.room-card:hover {
+  border-color: #94a3b8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.room-card.selected {
+  border-color: #2563eb;
+  background-color: #eff6ff;
+  box-shadow: 0 0 0 2px #2563eb;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.room-code {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  background-color: #0f172a;
+  color: #ffffff;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+.guest-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #475569;
+}
+
+.guest-tag .icon {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: #64748b;
+}
+
+.room-type {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 0.25rem;
+}
+
+.room-features {
+  font-size: 0.8125rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.card-footer {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 1rem;
+}
+
+.pricing {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.price-value {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.price-cycle {
+  font-size: 0.8125rem;
+  color: #64748b;
+
+}
+
+
+/* Base Pill Button */
+.status-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+/* Common Indicator Dot */
+.status-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: currentColor;
+  position: relative;
+}
+
+/* --- State: Available (Emerald Green) --- */
+.status-btn.available {
+  background-color: #ecfdf5;
+  color: #047857;
+  border-color: #a7f3d0;
+}
+
+.status-btn.available:hover {
+  background-color: #d1fae5;
+  border-color: #6ee7b7;
+}
+
+/* Subtle glow animation on the green indicator */
+.status-btn.available .status-indicator::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background-color: currentColor;
+  opacity: 0.4;
+  animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* --- State: Booked (Muted Gray / Red) --- */
+.status-btn.booked {
+  background-color: #f1f5f9;
+  color: #64748b;
+  border-color: #e2e8f0;
+  cursor: not-allowed;
+  user-select: none;
+}
+
+.status-btn.booked .status-indicator {
+  background-color: #94a3b8;
+}
+
+.room-card.is-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none; /* Prevents clicks on the card entirely */
+  filter: grayscale(20%);
+}

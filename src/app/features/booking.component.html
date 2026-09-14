@@ -1,0 +1,22 @@
+<main class="page-container">
+  <header class="app-header">
+    <div class="brand">
+      <div class="logo-mark">H</div>
+      <div>
+        <h1 class="brand-title">Hotel Booking simulator</h1>
+        <p class="brand-subtitle">Hotel & Suites Reservation</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout-stack">
+    <app-date-range-picker [errorMessage]="dateErrorMessage()" />
+
+    <app-room-list [rooms]="rooms()" [selectedRoomCode]="selectedRoomCode()" (roomSelected)="onRoomSelect($event)" />
+  </div>
+
+  @if (activeModalRoom(); as selected) {
+  <app-booking-details [room]="selected" (close)="closeModal()"
+    (confirmBooking)="handleBookingConfirmed($event)" />
+  }
+</main>

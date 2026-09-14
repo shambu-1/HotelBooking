@@ -1,0 +1,42 @@
+<section class="room-catalog">
+  <div class="catalog-header">
+    <div>
+      <h2 class="section-title">Available Accommodations</h2>
+      <p class="section-desc">Choose a room tailored to your travel preference</p>
+    </div>
+    <span class="count-badge">{{ rooms().length }} rooms listed</span>
+  </div>
+
+  <div class="rooms-grid">
+    @for (room of rooms(); track room.code) {
+    <div class="room-card" [class.selected]="room.code === selectedRoomCode()" (click)="onSelect(room)" tabindex="0" [class.is-disabled]="room.status === 'booked'">
+      <div class="card-header">
+        <span class="room-code">{{ room.code }}</span>
+        <span class="guest-tag">
+          <svg class="icon" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
+          </svg>
+          Up to {{ room.maxGuests }} Guests
+        </span>
+      </div>
+
+      <div class="card-body">
+        <h3 class="room-type">{{ room.type }}</h3>
+        <p class="room-features">Spacious layout with modern furnishings & ensuite bathroom.</p>
+      </div>
+
+      <div class="card-footer">
+        <div class="pricing">
+          <span class="price-value">₹{{ room.pricePerNight | number }}</span>
+          <span class="price-cycle">/ night</span>
+        </div>
+        <button type="button" class="status-btn" [class.available]="room.status === 'available'"
+          [class.booked]="room.status === 'booked'">
+          <span class="status-indicator"></span>
+          <span>{{ room.status === 'available' ? 'Available' : 'Booked' }}</span>
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+</section>
